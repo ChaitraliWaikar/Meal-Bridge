@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Bridge - Connecting Surplus Food to Those in Need</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #fafafa;
+      color: #333;
+    }
+    
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #7c73e6;
+      color: white;
+      padding: 20px 0;
+      height: 100vh;
+      position: fixed;
+    }
+    
+    .logo-container {
+      padding: 0 20px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      font-size: 32px;
+    }
+    
+    .nav-menu {
+      padding: 20px 0;
+    }
+    
+    .nav-item {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .nav-item:hover {
+      background-color: #6560c0;
+    }
+    
+    .nav-item.active {
+      background-color: #5d57b3;
+      border-left: 4px solid #ffe9e3;
+    }
+    
+    .nav-icon {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      margin-left: 250px;
+    }
+    
+    /* Header */
+    .header {
+      background-color: white;
+      padding: 15px 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .user-type {
+      position: relative;
+    }
+    
+    .dropdown-btn {
+      background-color: #7c73e6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      z-index: 1;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    
+    .user-type:hover .dropdown-content {
+      display: block;
+    }
+    
+    .dropdown-item {
+      padding: 12px 16px;
+      display: block;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #ffe9e3;
+    }
+    
+    .header-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .header-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    .header-link:hover {
+      color: #7c73e6;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background-color: #c4c1e0;
+      padding: 80px 50px;
+      text-align: center;
+      color: #333;
+    }
+    
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    
+    .cta-btn {
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .primary-btn {
+      background-color: #7c73e6;
+      color: white;
+    }
+    
+    .primary-btn:hover {
+      background-color: #6560c0;
+    }
+    
+    .secondary-btn {
+      background-color: #ffe9e3;
+      color: #333;
+    }
+    
+    .secondary-btn:hover {
+      background-color: #ffd5ca;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 80px 50px;
+      text-align: center;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      background-color: #7c73e6;
+      bottom: -10px;
+      left: 25%;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .feature-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      color: #7c73e6;
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .feature-desc {
+      color: #666;
+    }
+    
+    /* How It Works Section */
+    .how-it-works {
+      padding: 80px 50px;
+      background-color: #ffe9e3;
+    }
+    
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .step {
+      text-align: center;
+      max-width: 250px;
+      position: relative;
+    }
+    
+    .step-number {
+      background-color: #7c73e6;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0 auto 20px;
+    }
+    
+    .step-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .step-desc {
+      color: #555;
+    }
+    
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 25px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background-color: #c4c1e0;
+      z-index: -1;
+    }
+    
+    /* Impact Stats */
+    .impact {
+      padding: 80px 50px;
+      text-align: center;
+      background-color: #fafafa;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .stat {
+      padding: 20px;
+    }
+    
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      color: #7c73e6;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 18px;
+      color: #555;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #333;
+      color: white;
+      padding: 50px;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-col {
+      flex: 1;
+      padding: 0 20px;
+    }
+    
+    .footer-title {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 2px;
+      background-color: #7c73e6;
+      bottom: -10px;
+      left: 0;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-link {
+      margin-bottom: 10px;
+    }
+    
+    .footer-link a {
+      color: #bbb;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .footer-link a:hover {
+      color: white;
+    }
+    
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-icon {
+      color: white;
+      font-size: 20px;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 30px;
+      color: #bbb;
+      max-width: 1200px;
+      margin: 30px auto 0;
+    }
+    
+    /* Responsive Styling */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+      }
+      
+      .step::after {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 80px;
+        overflow-x: hidden;
+      }
+      
+      .logo-container {
+        padding: 20px 0;
+      }
+      
+      .logo span {
+        display: none;
+      }
+      
+      .nav-item span {
+        display: none;
+      }
+      
+      .main-content {
+        margin-left: 80px;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+      <div class="logo-container">
+        <div class="logo">
+          <i class="fa-solid fa-utensils logo-icon"></i>
+          <span>Meal Bridge</span>
+        </div>
+      </div>
+      
+      <div class="nav-menu">
+        <div class="nav-item active">
+          <i class="fa-solid fa-home nav-icon"></i>
+          <span>Home</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-truck nav-icon"></i>
+          <span>Track Donations</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-hands-helping nav-icon"></i>
+          <span>Volunteer</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-book-open nav-icon"></i>
+          <span>Education</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-chart-bar nav-icon"></i>
+          <span>Impact Dashboard</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-handshake nav-icon"></i>
+          <span>Partnerships</span>
+        </div>
+        <div class="nav-item">
+          <i class="fa-solid fa-cog nav-icon"></i>
+          <span>Settings</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="header">
+        <div class="user-type">
+          <button class="dropdown-btn">
+            Use This As <i class="fa-solid fa-chevron-down" style="margin-left: 10px;"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" class="dropdown-item">Donor</a>
+            <a href="#" class="dropdown-item">Recipient</a>
+            <a href="#" class="dropdown-item">Volunteer</a>
+          </div>
+        </div>
+        
+        <div class="header-links">
+          <a href="#" class="header-link">About Us</a>
+          <a href="#" class="header-link">How It Works</a>
+          <a href="#" class="header-link">Contact Us</a>
+          <a href="#" class="header-link">Login</a>
+          <a href="#" class="header-link">Sign Up</a>
+        </div>
+      </div>
+      
+      <!-- Hero Section -->
+      <div class="hero">
+        <h1>Bridging Food Surplus with Hunger</h1>
+        <p style="font-size: 30px;">-"MealBridge isn’t just a platform; it’s a movement toward a more sustainable and equitable food system."</p>
+        <div class="cta-buttons">
+          <a href="#" class="cta-btn primary-btn">Donate Food</a>
+          <a href="#" class="cta-btn secondary-btn">Request Food</a>
+        </div>
+      </div>
+      
+      <!-- Features Section -->
+      <div class="features">
+        <h2 class="section-title">How Meal Bridge Helps</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-handshake"></i>
+            </div>
+            <h3 class="feature-title">Easy Connections</h3>
+            <p class="feature-desc">Our platform streamlines the process of connecting food donors with recipients, making it simple to share surplus food with those who need it most.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-truck"></i>
+            </div>
+            <h3 class="feature-title">Reliable Logistics</h3>
+            <p class="feature-desc">Coordinate pickups and deliveries with our network of volunteer drivers to ensure food reaches its destination safely and on time.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-calendar-alt"></i>
+            </div>
+            <h3 class="feature-title">Scheduled Donations</h3>
+            <p class="feature-desc">Set up recurring donations to automatically match your regular surplus with organizations in need, saving time and reducing waste consistently.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3 class="feature-title">Impact Tracking</h3>
+            <p class="feature-desc">Monitor your contribution to fighting hunger and reducing food waste with detailed metrics and reports on your donation impact.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h3 class="feature-title">Community Building</h3>
+            <p class="feature-desc">Join a network of like-minded individuals and organizations committed to creating a more sustainable and equitable food system.</p>
+          </div>
+          
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fa-solid fa-shield-alt"></i>
+            </div>
+            <h3 class="feature-title">Safety Compliance</h3>
+            <p class="feature-desc">Our platform ensures all food donations comply with safety regulations and best practices for food handling and distribution.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- How It Works Section -->
+      <div class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Register</h3>
+            <p class="step-desc">Sign up as a donor, recipient, or volunteer and create your profile.</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Connect</h3>
+            <p class="step-desc">Donors list available food; recipients browse and request donations.</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Coordinate</h3>
+            <p class="step-desc">Arrange pickup or delivery with our volunteer network.</p>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Complete</h3>
+            <p class="step-desc">Track the donation and receive confirmation when completed.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Impact Stats -->
+      <div class="impact">
+        <h2 class="section-title">Our Impact</h2>
+        
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-content">
+          <div class="footer-col">
+            <h3 class="footer-title">Meal Bridge</h3>
+            <p>Connecting surplus food with those who need it most, reducing waste and fighting hunger in communities nationwide.</p>
+            <div class="social-icons">
+              <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          
+          <div class="footer-col">
+            <h3 class="footer-title">Quick Links</h3>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="#">Home</a></li>
+              <li class="footer-link"><a href="#">About Us</a></li>
+              <li class="footer-link"><a href="#">How It Works</a></li>
+              <li class="footer-link"><a href="#">Donate Food</a></li>
+              <li class="footer-link"><a href="#">Request Food</a></li>
+              <li class="footer-link"><a href="#">Volunteer</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-col">
+            <h3 class="footer-title">Resources</h3>
+            <ul class="footer-links">
+              <li class="footer-link"><a href="#">Food Safety Guidelines</a></li>
+              <li class="footer-link"><a href="#">Donation Policies</a></li>
+              <li class="footer-link"><a href="#">Educational Materials</a></li>
+              <li class="footer-link"><a href="#">Partner Resources</a></li>
+              <li class="footer-link"><a href="#">Success Stories</a></li>
+            </ul>
+          </div>
+          
+          <div class="footer-col">
+            <h3 class="footer-title">Contact Us</h3>
+            <ul class="footer-links">
+              <li class="footer-link"><i class="fa-solid fa-envelope" style="margin-right: 10px;"></i> info@mealbridge.org</li>
+              <li class="footer-link"><i class="fa-solid fa-phone" style="margin-right: 10px;"></i> (555) 123-4567</li>
+              <li class="footer-link"><i class="fa-solid fa-location-dot" style="margin-right: 10px;"></i> 123 Main Street, Suite 200<br>Anytown, USA 12345</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="copyright">
+          <p>&copy; 2025 Meal Bridge. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
