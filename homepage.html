@@ -30,12 +30,29 @@
       padding: 20px 0;
       height: 100vh;
       position: fixed;
+      transition: width 0.3s ease;
+      z-index: 100;
+    }
+    
+    .sidebar.collapsed {
+      width: 80px;
     }
     
     .logo-container {
       padding: 0 20px 20px;
       text-align: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .toggle-btn {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
     }
     
     .logo {
@@ -49,6 +66,10 @@
     .logo-icon {
       margin-right: 10px;
       font-size: 32px;
+    }
+    
+    .sidebar.collapsed .logo span {
+      display: none;
     }
     
     .nav-menu {
@@ -78,10 +99,19 @@
       text-align: center;
     }
     
+    .sidebar.collapsed .nav-item span {
+      display: none;
+    }
+    
     /* Main Content */
     .main-content {
       flex: 1;
       margin-left: 250px;
+      transition: margin-left 0.3s ease;
+    }
+    
+    .main-content.expanded {
+      margin-left: 80px;
     }
     
     /* Header */
@@ -478,12 +508,15 @@
 <body>
   <div class="container">
     <!-- Sidebar Navigation -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <div class="logo-container">
         <div class="logo">
           <i class="fa-solid fa-utensils logo-icon"></i>
           <span>Meal Bridge</span>
         </div>
+        <button class="toggle-btn" id="toggleSidebar">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
       </div>
       
       <div class="nav-menu">
@@ -492,68 +525,72 @@
           <span>Home</span>
         </div>
         <div class="nav-item">
+          <a href="./trackdonor.html" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-truck nav-icon"></i>
           <span>Track Donations</span>
+        </a>
         </div>
         <div class="nav-item">
+          <a href="./volunteer.html" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-hands-helping nav-icon"></i>
           <span>Volunteer</span>
+        </a>
         </div>
         <div class="nav-item">
+          <a href="./education.html" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-book-open nav-icon"></i>
           <span>Education</span>
+          </a>
         </div>
         <div class="nav-item">
+          <a href="./progress.html" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-chart-bar nav-icon"></i>
           <span>Impact Dashboard</span>
+        </a>
         </div>
         <div class="nav-item">
+          <a href="#" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-handshake nav-icon"></i>
           <span>Partnerships</span>
+        </a>
         </div>
         <div class="nav-item">
+          <a href="#" style="text-decoration: none; color: inherit;">
           <i class="fa-solid fa-cog nav-icon"></i>
           <span>Settings</span>
+        </a>
         </div>
       </div>
     </div>
     
     <!-- Main Content Area -->
-    <div class="main-content">
+    <div class="main-content" id="mainContent">
       <!-- Header -->
       <div class="header">
         <div class="user-type">
-          <button class="dropdown-btn">
-            Use This As <i class="fa-solid fa-chevron-down" style="margin-left: 10px;"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item">Donor</a>
-            <a href="#" class="dropdown-item">Recipient</a>
-            <a href="#" class="dropdown-item">Volunteer</a>
-          </div>
+          
         </div>
         
         <div class="header-links">
-          <a href="#" class="header-link">About Us</a>
-          <a href="#" class="header-link">How It Works</a>
-          <a href="#" class="header-link">Contact Us</a>
-          <a href="#" class="header-link">Login</a>
-          <a href="#" class="header-link">Sign Up</a>
+          <a href="#about" class="header-link">About Us</a>
+          <a href="#how-it-works" class="header-link">How It Works</a>
+          <a href="#contact" class="header-link">Contact Us</a>
+          <a href="./login.html" class="header-link">Sign Up</a>
         </div>
       </div>
       
       <!-- Hero Section -->
       <div class="hero">
         <h1>Bridging Food Surplus with Hunger</h1>
-        <p style="font-size: 30px;">-"MealBridge isn’t just a platform; it’s a movement toward a more sustainable and equitable food system."</p>
+        <p style="font-size: 30px;">-"MealBridge isn't just a platform; it's a movement toward a more sustainable and equitable food system."</p>
         <div class="cta-buttons">
-          <a href="#" class="cta-btn primary-btn">Donate Food</a>
-          <a href="#" class="cta-btn secondary-btn">Request Food</a>
+          <a href="./donor.html" class="cta-btn primary-btn">Donate Food</a>
+          <a href="./receipant.html" class="cta-btn secondary-btn">Request Food</a>
         </div>
       </div>
       
-      <!-- Features Section -->
-      <div class="features">
+      <!-- Features Section (About Us) -->
+      <div class="features" id="about">
         <h2 class="section-title">How Meal Bridge Helps</h2>
         <div class="features-grid">
           <div class="feature-card">
@@ -596,6 +633,7 @@
             <p class="feature-desc">Join a network of like-minded individuals and organizations committed to creating a more sustainable and equitable food system.</p>
           </div>
           
+          
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fa-solid fa-shield-alt"></i>
@@ -607,7 +645,7 @@
       </div>
       
       <!-- How It Works Section -->
-      <div class="how-it-works">
+      <div class="how-it-works" id="how-it-works">
         <h2 class="section-title">How It Works</h2>
         <div class="steps">
           <div class="step">
@@ -642,8 +680,8 @@
         
       </div>
       
-      <!-- Footer -->
-      <div class="footer">
+      <!-- Footer (Contact Us) -->
+      <div class="footer" id="contact">
         <div class="footer-content">
           <div class="footer-col">
             <h3 class="footer-title">Meal Bridge</h3>
@@ -660,8 +698,8 @@
             <h3 class="footer-title">Quick Links</h3>
             <ul class="footer-links">
               <li class="footer-link"><a href="#">Home</a></li>
-              <li class="footer-link"><a href="#">About Us</a></li>
-              <li class="footer-link"><a href="#">How It Works</a></li>
+              <li class="footer-link"><a href="#about">About Us</a></li>
+              <li class="footer-link"><a href="#how-it-works">How It Works</a></li>
               <li class="footer-link"><a href="#">Donate Food</a></li>
               <li class="footer-link"><a href="#">Request Food</a></li>
               <li class="footer-link"><a href="#">Volunteer</a></li>
@@ -695,5 +733,47 @@
       </div>
     </div>
   </div>
+
+  <!-- JavaScript for sidebar toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      const toggleBtn = document.getElementById('toggleSidebar');
+      const toggleIcon = toggleBtn.querySelector('i');
+      
+      toggleBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+        
+        // Change icon based on sidebar state
+        if (sidebar.classList.contains('collapsed')) {
+          toggleIcon.classList.remove('fa-chevron-left');
+          toggleIcon.classList.add('fa-chevron-right');
+        } else {
+          toggleIcon.classList.remove('fa-chevron-right');
+          toggleIcon.classList.add('fa-chevron-left');
+        }
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          if (this.getAttribute('href') !== '#') {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+              window.scrollTo({
+                top: targetElement.offsetTop - 70, // Adjust offset for header
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

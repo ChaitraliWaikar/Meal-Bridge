@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reducing Food Waste in Daily Life</title>
+  <style>
+    :root {
+      --first-color: #fafafa;
+      --second-color: #ffe9e3;
+      --third-color: #c4c1e0;
+      --fourth-color: #7c73e6;
+    }
+    
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--first-color);
+      color: #333;
+    }
+    
+    header {
+      background-color: var(--fourth-color);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 5px dashed var(--third-color);
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .intro {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: 3px solid var(--third-color);
+      text-align: center;
+    }
+    
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 15px 30px;
+      background-color: var(--second-color);
+      color: #333;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+      border: 2px solid var(--third-color);
+      border-bottom: none;
+    }
+    
+    .tab.active {
+      background-color: white;
+      position: relative;
+    }
+    
+    .tab-content {
+      display: none;
+      background-color: white;
+      border-radius: 0 10px 10px 10px;
+      padding: 20px;
+      border: 2px solid var(--third-color);
+      margin-bottom: 10px;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .problem-solution {
+      margin-bottom: 30px;
+    }
+    
+    .problem {
+      background-color: var(--third-color);
+      color: #333;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+      position: relative;
+    }
+    
+    .solution {
+      background-color: white;
+      padding: 15px;
+      border-radius: 0 0 10px 10px;
+      border: 2px solid var(--third-color);
+      display: flex;
+      align-items: center;
+    }
+    
+    .human-cartoon {
+      width: 120px;
+      height: 120px;
+      margin-right: 15px;
+    }
+    
+    .solution-text {
+      flex: 1;
+    }
+    
+    .fact-box {
+      background-color: var(--fourth-color);
+      color: white;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 30px 0;
+      text-align: center;
+      font-size: 1.2rem;
+      border: 3px dashed white;
+    }
+    
+    .conclusion {
+      background-color: var(--second-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    
+    footer {
+      background-color: var(--fourth-color);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+    
+    @media (max-width: 768px) {
+      .solution {
+        flex-direction: column;
+      }
+      
+      .human-cartoon {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Save Food, Save Planet!</h1>
+    <p>Simple Ways to Reduce Food Waste</p>
+  </header>
+  
+  <div class="container">
+    <div class="intro">
+      <h2>Why Fight Food Waste?</h2>
+      <p>One-third of all food produced is wasted globally. That's 1.3 billion tons per year!</p>
+    </div>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('kitchen')">In the Kitchen</div>
+      <div class="tab" onclick="switchTab('shopping')">Smart Shopping</div>
+    </div>
+    
+    <div id="kitchen" class="tab-content active">
+      <div class="problem-solution">
+        <div class="problem">PROBLEM: Forgotten leftovers that get thrown away</div>
+        <div class="solution">
+          <div class="human-cartoon">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="40" r="20" fill="#ffe9e3" /> <!-- head -->
+              <circle cx="53" cy="35" r="3" fill="#333" /> <!-- left eye -->
+              <circle cx="67" cy="35" r="3" fill="#333" /> <!-- right eye -->
+              <path d="M55 45 Q60 48 65 45" stroke="#333" stroke-width="2" fill="none" /> <!-- smile -->
+              <rect x="45" y="60" width="30" height="40" fill="#7c73e6" rx="5" /> <!-- body -->
+              <rect x="35" y="70" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- left arm -->
+              <rect x="75" y="65" width="10" height="25" fill="#ffe9e3" rx="3" /> <!-- right arm -->
+              <rect x="50" y="100" width="8" height="20" fill="#333" /> <!-- left leg -->
+              <rect x="62" y="100" width="8" height="20" fill="#333" /> <!-- right leg -->
+              <!-- refrigerator -->
+              <rect x="85" y="60" width="25" height="40" fill="white" stroke="#333" stroke-width="2" />
+              <rect x="85" y="75" width="25" height="2" fill="#333" />
+              <circle cx="87" cy="68" r="2" fill="#333" />
+              <rect x="77" y="85" width="8" height="4" fill="white" /> <!-- hand pointing to fridge -->
+            </svg>
+          </div>
+          <div class="solution-text">
+            <strong>SOLUTION:</strong> Create a "Eat Me First" container in your fridge. Label containers with dates. Turn leftovers into new meals like stir-fries or soups.
+          </div>
+        </div>
+      </div>
+      
+      <div class="problem-solution">
+        <div class="problem">PROBLEM: Fruits and vegetables go bad quickly</div>
+        <div class="solution">
+          <div class="human-cartoon">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="40" r="20" fill="#ffe9e3" /> <!-- head -->
+              <circle cx="53" cy="35" r="3" fill="#333" /> <!-- left eye -->
+              <circle cx="67" cy="35" r="3" fill="#333" /> <!-- right eye -->
+              <path d="M55 45 Q60 50 65 45" stroke="#333" stroke-width="2" fill="none" /> <!-- concerned expression -->
+              <rect x="45" y="60" width="30" height="40" fill="#c4c1e0" rx="5" /> <!-- body -->
+              <rect x="35" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- left arm -->
+              <rect x="75" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- right arm -->
+              <rect x="50" y="100" width="8" height="20" fill="#333" /> <!-- left leg -->
+              <rect x="62" y="100" width="8" height="20" fill="#333" /> <!-- right leg -->
+              <!-- fruits and vegetables -->
+              <circle cx="90" cy="80" r="10" fill="#ffe9e3" /> <!-- apple -->
+              <circle cx="75" cy="90" r="8" fill="#ffe9e3" /> <!-- tomato -->
+              <path d="M70 75 Q75 65 80 75" fill="#c4c1e0" /> <!-- broccoli -->
+              <path d="M85 65 Q90 55 95 65" fill="#c4c1e0" /> <!-- broccoli -->
+            </svg>
+          </div>
+          <div class="solution-text">
+            <strong>SOLUTION:</strong> Store properly! Keep fruits and vegetables separate. Use breathable bags for vegetables. Freeze fruits for smoothies before they spoil.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="shopping" class="tab-content">
+      <div class="problem-solution">
+        <div class="problem">PROBLEM: Buying too much food that expires</div>
+        <div class="solution">
+          <div class="human-cartoon">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="40" r="20" fill="#ffe9e3" /> <!-- head -->
+              <circle cx="53" cy="35" r="3" fill="#333" /> <!-- left eye -->
+              <circle cx="67" cy="35" r="3" fill="#333" /> <!-- right eye -->
+              <path d="M55 45 Q60 48 65 45" stroke="#333" stroke-width="2" fill="none" /> <!-- smile -->
+              <rect x="45" y="60" width="30" height="40" fill="#7c73e6" rx="5" /> <!-- body -->
+              <rect x="35" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- left arm -->
+              <rect x="75" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- right arm -->
+              <rect x="50" y="100" width="8" height="20" fill="#333" /> <!-- left leg -->
+              <rect x="62" y="100" width="8" height="20" fill="#333" /> <!-- right leg -->
+              <!-- shopping cart -->
+              <rect x="85" y="80" width="25" height="20" fill="white" stroke="#333" stroke-width="2" />
+              <path d="M85 100 L82 110" stroke="#333" stroke-width="2" />
+              <path d="M110 100 L113 110" stroke="#333" stroke-width="2" />
+              <circle cx="85" cy="112" r="3" fill="#333" />
+              <circle cx="110" cy="112" r="3" fill="#333" />
+              <path d="M85 85 C85 65, 110 65, 110 85" stroke="#333" stroke-width="2" fill="none" />
+              <rect x="90" y="70" width="15" height="10" fill="#ffe9e3" /> <!-- item in cart -->
+            </svg>
+          </div>
+          <div class="solution-text">
+            <strong>SOLUTION:</strong> Make a meal plan before shopping. Check what you already have. Make a list and stick to it. Buy smaller amounts more frequently.
+          </div>
+        </div>
+      </div>
+      
+      <div class="problem-solution">
+        <div class="problem">PROBLEM: Confusion about food date labels</div>
+        <div class="solution">
+          <div class="human-cartoon">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="40" r="20" fill="#ffe9e3" /> <!-- head -->
+              <circle cx="53" cy="35" r="3" fill="#333" /> <!-- left eye -->
+              <circle cx="67" cy="35" r="3" fill="#333" /> <!-- right eye -->
+              <path d="M55 45 Q60 40 65 45" stroke="#333" stroke-width="2" fill="none" /> <!-- confused frown -->
+              <text x="68" y="30" font-size="15" fill="#333">?</text> <!-- question mark -->
+              <rect x="45" y="60" width="30" height="40" fill="#c4c1e0" rx="5" /> <!-- body -->
+              <rect x="35" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- left arm -->
+              <rect x="75" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- right arm -->
+              <rect x="50" y="100" width="8" height="20" fill="#333" /> <!-- left leg -->
+              <rect x="62" y="100" width="8" height="20" fill="#333" /> <!-- right leg -->
+              <!-- food label -->
+              <rect x="85" y="70" width="25" height="30" fill="white" stroke="#333" stroke-width="2" />
+              <line x1="90" y1="80" x2="105" y2="80" stroke="#333" stroke-width="1" />
+              <line x1="90" y1="85" x2="105" y2="85" stroke="#333" stroke-width="1" />
+              <line x1="90" y1="90" x2="105" y2="90" stroke="#333" stroke-width="1" />
+            </svg>
+          </div>
+          <div class="solution-text">
+            <strong>SOLUTION:</strong> "Best before" means quality, not safety. "Use by" is about safety. Trust your senses - look, smell, and taste (if safe) to check if food is still good.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    <div class="problem-solution">
+      <div class="problem">PROBLEM: Food scraps going to landfill</div>
+      <div class="solution">
+        <div class="human-cartoon">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="40" r="20" fill="#ffe9e3" /> <!-- head -->
+            <circle cx="53" cy="35" r="3" fill="#333" /> <!-- left eye -->
+            <circle cx="67" cy="35" r="3" fill="#333" /> <!-- right eye -->
+            <path d="M55 45 Q60 48 65 45" stroke="#333" stroke-width="2" fill="none" /> <!-- smile -->
+            <rect x="45" y="60" width="30" height="40" fill="#7c73e6" rx="5" /> <!-- body -->
+            <rect x="35" y="65" width="10" height="30" fill="#ffe9e3" rx="3" /> <!-- left arm -->
+            <rect x="75" y="70" width="10" height="25" fill="#ffe9e3" rx="3" /> <!-- right arm -->
+            <rect x="50" y="100" width="8" height="20" fill="#333" /> <!-- left leg -->
+            <rect x="62" y="100" width="8" height="20" fill="#333" /> <!-- right leg -->
+            <!-- compost bin -->
+            <path d="M85 60 L100 60 L105 100 L80 100 Z" fill="#c4c1e0" />
+            <path d="M87 70 L98 70" stroke="#ffe9e3" stroke-width="2" />
+            <path d="M87 80 L98 80" stroke="#ffe9e3" stroke-width="2" />
+            <path d="M87 90 L98 90" stroke="#ffe9e3" stroke-width="2" />
+            <path d="M80 60 C80 50, 105 50, 105 60" fill="none" stroke="#333" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="solution-text">
+          <strong>SOLUTION:</strong> Compost food scraps to create nutrient-rich soil for plants. Start with a simple backyard bin or countertop collector.
+        </div>
+      </div>
+    </div>
+    
+    
+      
+  </div>
+  
+  <footer>
+    <p>© 2025 Food Waste Reduction Initiative</p>
+  </footer>
+  
+  <script>
+    function switchTab(tabId) {
+      // Hide all tab contents
+      const tabContents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove("active");
+      }
+      
+      // Remove active class from all tabs
+      const tabs = document.getElementsByClassName("tab");
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+      }
+      
+      // Show the selected tab content
+      document.getElementById(tabId).classList.add("active");
+      
+      // Add active class to the clicked tab
+      event.currentTarget.classList.add("active");
+    }
+  </script>
+</body>
+</html>
