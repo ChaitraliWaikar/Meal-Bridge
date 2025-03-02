@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Sharing Network - Your Progress</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: #fafafa;
+      color: #333;
+    }
+    
+    header {
+      background: #7c73e6;
+      color: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    @media (min-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #7c73e6;
+    }
+    
+    .time-selector {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .time-selector button {
+      background: #ffe9e3;
+      color: #333;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .time-selector button.active {
+      background: #7c73e6;
+      color: white;
+    }
+    
+    .time-selector button:hover:not(.active) {
+      background: #c4c1e0;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .stat-box {
+      background: #ffe9e3;
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #7c73e6;
+      margin-bottom: 0.3rem;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .progress-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background: #f0f0f0;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: #7c73e6;
+      width: 75%;
+    }
+    
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .badge-donated {
+      background: #ffe9e3;
+      color: #ff6347;
+    }
+    
+    .badge-received {
+      background: #c4c1e0;
+      color: #7c73e6;
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .icon-donated {
+      background: #ffe9e3;
+      color: #ff6347;
+    }
+    
+    .icon-received {
+      background: #c4c1e0;
+      color: #7c73e6;
+    }
+    
+    .activity-details {
+      flex-grow: 1;
+    }
+    
+    .activity-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    
+    .activity-meta {
+      display: flex;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    
+    .activity-meta > div {
+      margin-right: 1rem;
+    }
+    
+    .activity-amount {
+      font-weight: 700;
+      margin-left: auto;
+    }
+    
+    .goals-section h3 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .goal-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .goal-icon {
+      width: 40px;
+      height: 40px;
+      background: #c4c1e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c73e6;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .goal-details {
+      flex-grow: 1;
+    }
+    
+    .goal-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    
+    .goal-bar-container {
+      width: 100%;
+      height: 8px;
+      background: #f0f0f0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    
+    .goal-bar {
+      height: 100%;
+      background: #7c73e6;
+    }
+    
+    .goal-stats {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.3rem;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .view-all {
+      color: #7c73e6;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    
+    .impact-box {
+      background: #c4c1e0;
+      padding: 1.5rem 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .impact-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #7c73e6;
+      margin-bottom: 0.5rem;
+    }
+    
+    .impact-label {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    
+    .filters {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .filter-button {
+      background: #ffe9e3;
+      color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .filter-button.active {
+      background: #7c73e6;
+      color: white;
+    }
+    
+    .filter-button:hover:not(.active) {
+      background: #c4c1e0;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5rem;
+    }
+    
+    .nav-tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    
+    .nav-tab.active {
+      border-bottom: 2px solid #7c73e6;
+      color: #7c73e6;
+      font-weight: 600;
+    }
+    
+    .nav-tab:hover:not(.active) {
+      color: #7c73e6;
+    }
+    
+    .chart {
+      height: 200px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+      gap: 0.5rem;
+    }
+    
+    .chart-column {
+      flex-grow: 1;
+      background: #7c73e6;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+    }
+    
+    .chart-column:nth-child(2n) {
+      background: #c4c1e0;
+    }
+    
+    .chart-label {
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: #888;
+    }
+    
+    .chart-value {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: #333;
+      font-weight: 600;
+    }
+    
+    footer {
+      background: #ffe9e3;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 2rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Food Sharing Network</h1>
+    </div>
+  </header>
+  
+  <div class="container">
+    <h2>Your Progress Dashboard</h2>
+    <p>Track your contributions and impact in fighting food waste</p>
+    
+    <div class="filters">
+      <button class="filter-button active">All Activities</button>
+      <button class="filter-button">Donations</button>
+      <button class="filter-button">Received</button>
+    </div>
+    
+    <div class="dashboard">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Overall Statistics</h3>
+          <div class="time-selector">
+            <button>Week</button>
+            <button class="active">Month</button>
+            <button>Year</button>
+            <button>All</button>
+          </div>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">248 kg</div>
+            <div class="stat-label">Total Donated</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">187 kg</div>
+            <div class="stat-label">Total Received</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">23</div>
+            <div class="stat-label">Donations Made</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">17</div>
+            <div class="stat-label">Deliveries Received</div>
+          </div>
+        </div>
+        
+        <div class="progress-section">
+          <div>Monthly Goal: 300kg</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 75%;"></div>
+          </div>
+          <div style="text-align: right;">75% Complete (225kg / 300kg)</div>
+        </div>
+        
+        <div class="nav-tabs">
+          <div class="nav-tab active">This Month</div>
+          <div class="nav-tab">Last 6 Months</div>
+        </div>
+        
+        <div class="chart">
+          <div class="chart-column" style="height: 60%;">
+            <div class="chart-value">45kg</div>
+            <div class="chart-label">Week 1</div>
+          </div>
+          <div class="chart-column" style="height: 80%;">
+            <div class="chart-value">60kg</div>
+            <div class="chart-label">Week 2</div>
+          </div>
+          <div class="chart-column" style="height: 90%;">
+            <div class="chart-value">68kg</div>
+            <div class="chart-label">Week 3</div>
+          </div>
+          <div class="chart-column" style="height: 70%;">
+            <div class="chart-value">52kg</div>
+            <div class="chart-label">Week 4</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="section-header">
+          <h3 class="card-title">Recent Activity</h3>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon icon-donated">D</div>
+          <div class="activity-details">
+            <div class="activity-title">Donated to City Food Bank</div>
+            <div class="activity-meta">
+              <div>Feb 28, 2025</div>
+              <div>Produce, Bread</div>
+            </div>
+          </div>
+          <div class="activity-amount">15 kg</div>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon icon-received">R</div>
+          <div class="activity-details">
+            <div class="activity-title">Received from Local Bakery</div>
+            <div class="activity-meta">
+              <div>Feb 26, 2025</div>
+              <div>Pastries, Bread</div>
+            </div>
+          </div>
+          <div class="activity-amount">8 kg</div>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon icon-donated">D</div>
+          <div class="activity-details">
+            <div class="activity-title">Donated to Hope Shelter</div>
+            <div class="activity-meta">
+              <div>Feb 24, 2025</div>
+              <div>Canned Goods, Produce</div>
+            </div>
+          </div>
+          <div class="activity-amount">12 kg</div>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon icon-received">R</div>
+          <div class="activity-details">
+            <div class="activity-title">Received from Farm Fresh</div>
+            <div class="activity-meta">
+              <div>Feb 22, 2025</div>
+              <div>Vegetables, Fruits</div>
+            </div>
+          </div>
+          <div class="activity-amount">20 kg</div>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon icon-donated">D</div>
+          <div class="activity-details">
+            <div class="activity-title">Donated to Community Kitchen</div>
+            <div class="activity-meta">
+              <div>Feb 20, 2025</div>
+              <div>Dairy, Protein</div>
+            </div>
+          </div>
+          <div class="activity-amount">10 kg</div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3 class="card-title">Your Goals</h3>
+        
+        <div class="goals-section">
+          <div class="goal-item">
+            <div class="goal-icon">1</div>
+            <div class="goal-details">
+              <div class="goal-title">Monthly Donation Goal</div>
+              <div class="goal-bar-container">
+                <div class="goal-bar" style="width: 75%;"></div>
+              </div>
+              <div class="goal-stats">
+                <div>225kg of 300kg</div>
+                <div>75% Complete</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="goal-item">
+            <div class="goal-icon">2</div>
+            <div class="goal-details">
+              <div class="goal-title">Donation Frequency</div>
+              <div class="goal-bar-container">
+                <div class="goal-bar" style="width: 90%;"></div>
+              </div>
+              <div class="goal-stats">
+                <div>9 of 10 donations</div>
+                <div>90% Complete</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="goal-item">
+            <div class="goal-icon">3</div>
+            <div class="goal-details">
+              <div class="goal-title">Food Category Diversity</div>
+              <div class="goal-bar-container">
+                <div class="goal-bar" style="width: 60%;"></div>
+              </div>
+              <div class="goal-stats">
+                <div>6 of 10 categories</div>
+                <div>60% Complete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <h3 class="card-title">Your Impact</h3>
+        
+        <div class="impact-grid">
+          <div class="impact-box">
+            <div class="impact-value">435</div>
+            <div class="impact-label">Meals Provided</div>
+          </div>
+          <div class="impact-box">
+            <div class="impact-value">124</div>
+            <div class="impact-label">CO₂ Saved (kg)</div>
+          </div>
+          <div class="impact-box">
+            <div class="impact-value">32</div>
+            <div class="impact-label">Water Saved (m³)</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <p>Your efforts have helped feed 87 people this month!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div class="container">
+      <p>Food Sharing Network © 2025 | Fighting Food Waste Together</p>
+    </div>
+  </footer>
+</body>
+</html>

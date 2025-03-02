@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map Example</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+          integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+          crossorigin=""/>
+    <style>
+        #map { 
+            height: 600px; 
+            width: 100%; 
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div id="map"></div> <!-- Map container -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+            integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+            crossorigin=""></script>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([16.0398006, 120.3337411], 17);
+
+        // Option 1: OpenStreetMap Tile Layer (Default)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Option 2: Mapbox Tile Layer (Uncomment to use)
+        /*
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={yourAccessToken}', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a>',
+            id: 'mapbox/streets-v11', // Mapbox style ID
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'your-access-token' // Replace with your Mapbox access token
+        }).addTo(map);
+        */
+
+        // Variables for marker and circle
+        let marker, circle, zoomed;
+
+        // Watch the user's geolocation
+        navigator.geolocation.watchPosition(success, error);
+
+        function success(pos) {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            const accuracy = pos.coords.accuracy;
+
+            // Remove existing marker and circle if they exist
+            if (marker) {
+                map.removeLayer(marker);
+                map.removeLayer(circle);
+            }
+
+            // Add a new marker and circle for accuracy
+            marker = L.marker([lat, lng]).addTo(map);
+            circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
+
+            // Zoom to the accuracy circle if not already zoomed
+            if (!zoomed) {
+                zoomed = map.fitBounds(circle.getBounds());
+            }
+
+            // Set the map view to the user's current position
+            map.setView([lat, lng]);
+        }
+
+        function error(err) {
+            if (err.code === 1) {
+                alert("Please allow geolocation access");
+            } else {
+                alert("Cannot get current location");
+            }
+        }
+    </script>
+</body>
+</html>

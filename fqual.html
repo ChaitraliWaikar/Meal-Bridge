@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Quality Test Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: #132743; /* fourth-color */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .form-container {
+            padding: 20px;
+        }
+        
+        .step {
+            display: none;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .step-header {
+            background: #407088; /* third-color */
+            color: white;
+            padding: 10px 15px;
+            margin: -20px -20px 20px -20px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        .radio-group {
+            margin-bottom: 15px;
+        }
+        
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+        
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button.prev {
+            background: #ffb5b5; /* second-color */
+            color: #132743;
+        }
+        
+        button.next, button.submit {
+            background: #407088; /* third-color */
+            color: white;
+        }
+        
+        .progress-container {
+            padding: 15px 20px;
+            background: #ffcbcb; /* first-color */
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ffb5b5; /* second-color */
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .progress-step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffb5b5; /* second-color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .progress-step.active {
+            background: #407088; /* third-color */
+            color: white;
+        }
+        
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .alert-danger {
+            background: #ffcbcb; /* first-color */
+            border: 1px solid #ffb5b5; /* second-color */
+            color: #132743; /* fourth-color */
+        }
+        
+        .summary {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+        
+        .summary h3 {
+            margin-top: 0;
+            color: #407088; /* third-color */
+        }
+        
+        .summary-item {
+            margin-bottom: 10px;
+        }
+        
+        .summary-item strong {
+            display: inline-block;
+            width: 180px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Food Quality Assurance Test Form</h1>
+        </header>
+        
+        <div class="progress-container">
+            <div class="progress-bar"> 
+                <div class="progress-step">1</div>
+                <div class="progress-step">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form id="foodQualityForm" action="./donor.html" method="POST">
+            
+                <!-- Step 1: Basic Information -->
+                <div class="step active" id="step1">
+                    <div class="step-header">
+                        <h2>Step 1: Basic Information</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donationId">Donation ID:</label>
+                        <input type="text" id="donationId" name="donationId" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donorName">Donor Name/Organization:</label>
+                        <input type="text" id="donorName" name="donorName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donationDate">Date of Donation:</label>
+                        <input type="date" id="donationDate" name="donationDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="donationTime">Time of Donation:</label>
+                        <input type="time" id="donationTime" name="donationTime" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inspectorName">Inspector Name:</label>
+                        <input type="text" id="inspectorName" name="inspectorName" required>
+                    </div>
+                    
+                    <div class="button-group">
+                        <div></div> <!-- Empty div for spacing -->
+                        <button type="button" class="next" onclick="nextStep(1)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Food Type & Packaging -->
+                <div class="step" id="step2">
+                    <div class="step-header">
+                        <h2>Step 2: Food Type & Packaging</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="foodCategory">Food Category:</label>
+                        <select id="foodCategory" name="foodCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="fresh">Fresh Produce</option>
+                            <option value="canned">Canned Goods</option>
+                            <option value="bakery">Bakery Items</option>
+                            <option value="dairy">Dairy Products</option>
+                            <option value="meat">Meat & Poultry</option>
+                            <option value="frozen">Frozen Foods</option>
+                            <option value="prepared">Prepared Meals</option>
+                            <option value="dry">Dry Goods</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="specificFoodItems">Specific Food Items:</label>
+                        <textarea id="specificFoodItems" name="specificFoodItems" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quantity">Quantity (in pounds or units):</label>
+                        <input type="number" id="quantity" name="quantity" min="0" step="0.1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Packaging Condition:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="packaging" value="excellent" required> Excellent - No damage or issues</label>
+                            <label><input type="radio" name="packaging" value="good"> Good - Minor issues, but safe</label>
+                            <label><input type="radio" name="packaging" value="fair"> Fair - Some concerns, needs repackaging</label>
+                            <label><input type="radio" name="packaging" value="poor"> Poor - Damaged, unsafe</label>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="prev" onclick="prevStep(2)">Previous</button>
+                        <button type="button" class="next" onclick="nextStep(2)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Quality Assessment -->
+                <div class="step" id="step3">
+                    <div class="step-header">
+                        <h2>Step 3: Quality Assessment</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Visual Inspection:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="visualIssues" value="mold"> Signs of mold or rot</label>
+                            <label><input type="checkbox" name="visualIssues" value="discoloration"> Unusual discoloration</label>
+                            <label><input type="checkbox" name="visualIssues" value="infestation"> Signs of pests or infestation</label>
+                            <label><input type="checkbox" name="visualIssues" value="damage"> Physical damage</label>
+                            <label><input type="checkbox" name="visualIssues" value="none"> No issues detected</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Odor Assessment:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="odor" value="normal" required> Normal - Expected smell for this food</label>
+                            <label><input type="radio" name="odor" value="minor"> Minor issues - Slightly off but acceptable</label>
+                            <label><input type="radio" name="odor" value="major"> Major issues - Off-putting odor</label>
+                            <label><input type="radio" name="odor" value="spoiled"> Spoiled - Clear signs of spoilage</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="temperature">Temperature (if applicable, in °F):</label>
+                        <input type="number" id="temperature" name="temperature" min="-20" max="200" step="0.1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Temperature Assessment (for perishables):</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="tempAssessment" value="appropriate"> Appropriate for food type</label>
+                            <label><input type="radio" name="tempAssessment" value="minor"> Minor deviation but safe</label>
+                            <label><input type="radio" name="tempAssessment" value="major"> Major deviation, potential risk</label>
+                            <label><input type="radio" name="tempAssessment" value="na"> Not applicable</label>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="prev" onclick="prevStep(3)">Previous</button>
+                        <button type="button" class="next" onclick="nextStep(3)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Date & Safety Check -->
+                <div class="step" id="step4">
+                    <div class="step-header">
+                        <h2>Step 4: Date & Safety Check</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="manufactureDateVisible">Is manufacturing date visible?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="manufactureDateVisible" value="yes" required> Yes</label>
+                            <label><input type="radio" name="manufactureDateVisible" value="no"> No</label>
+                            <label><input type="radio" name="manufactureDateVisible" value="na"> Not applicable</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="manufactureDate">Manufacturing Date (if visible):</label>
+                        <input type="date" id="manufactureDate" name="manufactureDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryDateVisible">Is expiry/best-before date visible?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="expiryDateVisible" value="yes" required> Yes</label>
+                            <label><input type="radio" name="expiryDateVisible" value="no"> No</label>
+                            <label><input type="radio" name="expiryDateVisible" value="na"> Not applicable</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry/Best-Before Date (if visible):</label>
+                        <input type="date" id="expiryDate" name="expiryDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Compliance with Food Safety Standards:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="compliance" value="sealed"> Properly sealed</label>
+                            <label><input type="checkbox" name="compliance" value="labels"> Proper labeling (ingredients, allergens)</label>
+                            <label><input type="checkbox" name="compliance" value="handling"> Proper handling</label>
+                            <label><input type="checkbox" name="compliance" value="transport"> Proper transport conditions</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="allergensPresent">Known Allergens Present:</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="allergens" value="dairy"> Dairy</label>
+                            <label><input type="checkbox" name="allergens" value="eggs"> Eggs</label>
+                            <label><input type="checkbox" name="allergens" value="peanuts"> Peanuts</label>
+                            <label><input type="checkbox" name="allergens" value="treenuts"> Tree Nuts</label>
+                            <label><input type="checkbox" name="allergens" value="fish"> Fish</label>
+                            <label><input type="checkbox" name="allergens" value="shellfish"> Shellfish</label>
+                            <label><input type="checkbox" name="allergens" value="soy"> Soy</label>
+                            <label><input type="checkbox" name="allergens" value="wheat"> Wheat/Gluten</label>
+                            <label><input type="checkbox" name="allergens" value="other"> Other</label>
+                            <label><input type="checkbox" name="allergens" value="none"> None/Not Applicable</label>
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="prev" onclick="prevStep(4)">Previous</button>
+                        <button type="button" class="next" onclick="nextStep(4)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Final Assessment -->
+                <div class="step" id="step5">
+                    <div class="step-header">
+                        <h2>Step 5: Final Assessment</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Overall Quality Assessment:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="overallQuality" value="excellent" required> Excellent - High quality, safe for distribution</label>
+                            <label><input type="radio" name="overallQuality" value="good"> Good - Safe for distribution</label>
+                            <label><input type="radio" name="overallQuality" value="acceptable"> Acceptable - Safe but distribute soon</label>
+                            <label><input type="radio" name="overallQuality" value="poor"> Poor - Not recommended for distribution</label>
+                            <label><input type="radio" name="overallQuality" value="unsafe"> Unsafe - Must be discarded</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="recommendedUseBy">Recommended Use-By Date:</label>
+                        <input type="date" id="recommendedUseBy" name="recommendedUseBy" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="storageInstructions">Storage Instructions:</label>
+                        <textarea id="storageInstructions" name="storageInstructions" rows="2" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="additionalNotes">Additional Notes/Concerns:</label>
+                        <textarea id="additionalNotes" name="additionalNotes" rows="3"></textarea>
+                    </div>
+                    
+                    <div id="summary" class="summary" style="display: none;">
+                        <h3>Form Summary</h3>
+                        <div id="summaryContent"></div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="prev" onclick="prevStep(5)">Previous</button>
+                        <button type="button" class="submit" onclick="showSummary()">Review Submission</button>
+                    </div>
+                    
+                    <div id="finalButtons" class="button-group" style="display: none; margin-top: 15px;">
+                        <button type="button" class="prev" onclick="editForm()">Edit Form</button>
+                        <button type="submit" class="submit">Submit Form</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function nextStep(currentStep) {
+            // Basic validation for current step
+            const form = document.getElementById('foodQualityForm');
+            const currentStepElement = document.getElementById('step' + currentStep);
+            
+            // Get all required inputs in current step
+            const requiredInputs = currentStepElement.querySelectorAll('[required]');
+            let isValid = true;
+            
+            // Check if all required fields are filled
+            requiredInputs.forEach(input => {
+                if (input.type === 'radio') {
+                    // For radio buttons, check if any in the group is checked
+                    const name = input.name;
+                    const checkedRadio = currentStepElement.querySelector(`input[name="${name}"]:checked`);
+                    if (!checkedRadio) {
+                        isValid = false;
+                        // Find the label for this radio group
+                        const radioGroupLabel = findLabelForElement(input);
+                        highlightError(radioGroupLabel.parentElement);
+                    }
+                } else if (!input.value.trim()) {
+                    isValid = false;
+                    highlightError(input);
+                }
+            });
+            
+            if (!isValid) {
+                alert('Please fill in all required fields before proceeding.');
+                return;
+            }
+            
+            // Move to next step
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + (currentStep + 1)).classList.add('active');
+            
+            // Update progress indicator
+            document.querySelectorAll('.progress-step')[currentStep].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function prevStep(currentStep) {
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.getElementById('step' + (currentStep - 1)).classList.add('active');
+            
+            // Update progress indicator
+            document.querySelectorAll('.progress-step')[currentStep - 1].classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function findLabelForElement(element) {
+            // Try to find direct label
+            let label = document.querySelector(`label[for="${element.id}"]`);
+            
+            // If no direct label, try to find the closest label ancestor
+            if (!label && element.closest('label')) {
+                label = element.closest('label');
+            }
+            
+            // If still no label, look for a label that might be a parent of the radio group
+            if (!label) {
+                const radioGroup = element.closest('.radio-group');
+                if (radioGroup) {
+                    const parentDiv = radioGroup.parentElement;
+                    if (parentDiv) {
+                        label = parentDiv.querySelector('label');
+                    }
+                }
+            }
+            
+            return label;
+        }
+        
+        function highlightError(element) {
+            element.style.borderColor = '#ff0000';
+            element.addEventListener('input', function() {
+                this.style.borderColor = '';
+            }, { once: true });
+        }
+        
+        function showSummary() {
+            // Collect form data
+            const form = document.getElementById('foodQualityForm');
+            const formData = new FormData(form);
+            let summaryHTML = '';
+            
+            // Basic Information
+            summaryHTML += '<div class="summary-item"><strong>Donation ID:</strong> ' + (formData.get('donationId') || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Donor:</strong> ' + (formData.get('donorName') || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Date & Time:</strong> ' + (formData.get('donationDate') || 'Not provided') + ' ' + (formData.get('donationTime') || '') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Inspector:</strong> ' + (formData.get('inspectorName') || 'Not provided') + '</div>';
+            
+            // Food Type & Packaging
+            const foodCategory = formData.get('foodCategory');
+            let foodCategoryText = '';
+            if (foodCategory) {
+                const selectElement = document.getElementById('foodCategory');
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                foodCategoryText = selectedOption ? selectedOption.text : foodCategory;
+            }
+            
+            summaryHTML += '<div class="summary-item"><strong>Food Category:</strong> ' + (foodCategoryText || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Specific Items:</strong> ' + (formData.get('specificFoodItems') || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Quantity:</strong> ' + (formData.get('quantity') || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Packaging:</strong> ' + (formData.get('packaging') || 'Not assessed') + '</div>';
+            
+            // Quality Assessment
+            const visualIssues = formData.getAll('visualIssues');
+            summaryHTML += '<div class="summary-item"><strong>Visual Issues:</strong> ' + (visualIssues.length ? visualIssues.join(', ') : 'None') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Odor:</strong> ' + (formData.get('odor') || 'Not assessed') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Temperature:</strong> ' + (formData.get('temperature') || 'N/A') + ' °F</div>';
+            summaryHTML += '<div class="summary-item"><strong>Temp Assessment:</strong> ' + (formData.get('tempAssessment') || 'N/A') + '</div>';
+            
+            // Date & Safety
+            summaryHTML += '<div class="summary-item"><strong>Mfg Date Visible:</strong> ' + (formData.get('manufactureDateVisible') || 'Not specified') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Mfg Date:</strong> ' + (formData.get('manufactureDate') || 'N/A') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Expiry Date Visible:</strong> ' + (formData.get('expiryDateVisible') || 'Not specified') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Expiry Date:</strong> ' + (formData.get('expiryDate') || 'N/A') + '</div>';
+            
+            const compliance = formData.getAll('compliance');
+            summaryHTML += '<div class="summary-item"><strong>Compliance:</strong> ' + (compliance.length ? compliance.join(', ') : 'None checked') + '</div>';
+            
+            const allergens = formData.getAll('allergens');
+            summaryHTML += '<div class="summary-item"><strong>Allergens:</strong> ' + (allergens.length ? allergens.join(', ') : 'None') + '</div>';
+            
+            // Final Assessment
+            summaryHTML += '<div class="summary-item"><strong>Overall Quality:</strong> ' + (formData.get('overallQuality') || 'Not assessed') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Use By:</strong> ' + (formData.get('recommendedUseBy') || 'Not specified') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Storage:</strong> ' + (formData.get('storageInstructions') || 'Not provided') + '</div>';
+            summaryHTML += '<div class="summary-item"><strong>Notes:</strong> ' + (formData.get('additionalNotes') || 'None') + '</div>';
+            
+            // Display summary
+            document.getElementById('summaryContent').innerHTML = summaryHTML;
+            document.getElementById('summary').style.display = 'block';
+            document.getElementById('finalButtons').style.display = 'flex';
+            document.querySelector('#step5 .button-group').style.display = 'none';
+        }
+        
+        function editForm() {
+            document.getElementById('summary').style.display = 'none';
+            document.getElementById('finalButtons').style.display = 'none';
+            document.querySelector('#step5 .button-group').style.display = 'flex';
+        }
+        
+        // Initialize form submit handler
+        document.getElementById('foodQualityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Form submitted successfully! In a real implementation, this would be sent to the server.');
+            // Here you would typically send the form data to your server
+        });
+    </script>
+</body>
+</html>

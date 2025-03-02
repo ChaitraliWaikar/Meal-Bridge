@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Portal</title>
+    <link rel="stylesheet" href="donor.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Food Donation Portal</h1>
+            <p class="tagline">Your donations feed families in need</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="donation-form" id="donationForm">
+                <h2>Food Donation Form</h2>
+                <div class="steps-container">
+                    <div class="steps-nav">
+                        <div class="step-item">
+                            <div class="step-number active" id="step1-indicator">1</div>
+                            <div class="step-label active">Donor Information</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step2-indicator">2</div>
+                            <div class="step-label">Food Details</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step3-indicator">3</div>
+                            <div class="step-label">Delivery Options</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step4-indicator">4</div>
+                            <div class="step-label">Review & Submit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="foodDonationForm">
+                    <!-- Step 1: Donor Information -->
+                    <div class="form-section active" id="step1">
+                        <h3>Step 1: Donor Information</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name*</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address*</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organization">Organization (if applicable)</label>
+                            <input type="text" id="organization">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address*</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        <div class="step-buttons">
+                            <button type="button" id="step1Next" class="next-btn">Next: Food Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Food Details -->
+                    <div class="form-section" id="step2">
+                        <h3>Step 2: Food Details</h3>
+                        <div class="form-group">
+                            <label>Food Type*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="perishable" name="foodType" value="perishable">
+                                    <label for="perishable">Perishable</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="nonPerishable" name="foodType" value="nonPerishable" checked>
+                                    <label for="nonPerishable">Non-Perishable</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="foodItems">Food Items*</label>
+                            <textarea id="foodItems" rows="3" required placeholder="e.g., 10 cans of soup, 5 boxes of pasta, etc."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Approximate Quantity (lbs/kg)*</label>
+                            <input type="number" id="quantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="packaging">Packaging Details</label>
+                            <select id="packaging">
+                                <option value="original">Original Packaging</option>
+                                <option value="repackaged">Repackaged</option>
+                                <option value="bulk">Bulk</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date (if applicable)</label>
+                            <input type="date" id="expiryDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="instructions">Special Instructions</label>
+                            <textarea id="instructions" rows="2" placeholder="Any handling instructions or notes"></textarea>
+                        </div>
+                        <div class="step-buttons">
+                            <button type="button" id="step2Back" class="back-btn">Back: Donor Info</button>
+                            <button type="button" id="step2Next" class="next-btn">Next: Delivery Options</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Delivery Options -->
+                    <div class="form-section" id="step3">
+                        <h3>Step 3: Delivery Options</h3>
+                        <div class="form-group">
+                            <label>Preferred Method*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="pickup" name="deliveryMethod" value="pickup" checked>
+                                    <label for="pickup">Schedule a Pickup</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="dropoff" name="deliveryMethod" value="dropoff">
+                                    <label for="dropoff">Drop-off at Location</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="delivery-pickup-options">
+                            <div class="form-group" id="pickupDateGroup">
+                                <label for="pickupDate">Preferred Pickup Date*</label>
+                                <input type="date" id="pickupDate" required>
+                            </div>
+                            <div class="form-group" id="pickupTimeGroup">
+                                <label for="pickupTime">Preferred Pickup Time*</label>
+                                <select id="pickupTime" required>
+                                    <option value="">Select a time</option>
+                                    <option value="morning">Morning (9AM - 12PM)</option>
+                                    <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                                    <option value="evening">Evening (4PM - 7PM)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="delivery-dropoff-options" style="display: none;">
+                            <div class="form-group" id="dropoffLocationGroup">
+                                <label for="dropoffLocation">Select Drop-off Location*</label>
+                                <select id="dropoffLocation">
+                                    <option value="">Select a location</option>
+                                    <option value="loc1">Community Food Bank - Downtown</option>
+                                    <option value="loc2">Hope Shelter - Westside</option>
+                                    <option value="loc3">Helping Hands Center - Northgate</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="dropoffDateGroup">
+                                <label for="dropoffDate">Planned Drop-off Date*</label>
+                                <input type="date" id="dropoffDate">
+                            </div>
+                        </div>
+                        <div class="step-buttons">
+                            <button type="button" id="step3Back" class="back-btn">Back: Food Details</button>
+                            <button type="button" id="step3Next" class="next-btn">Next: Review & Submit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Review & Submit -->
+                    <div class="form-section" id="step4">
+                        <h3>Step 4: Review & Submit</h3>
+                        <div class="review-section">
+                            <h4>Donor Information</h4>
+                            <div id="reviewDonorInfo" class="review-content">
+                                <p><strong>Name:</strong> <span id="reviewName">-</span></p>
+                                <p><strong>Email:</strong> <span id="reviewEmail">-</span></p>
+                                <p><strong>Phone:</strong> <span id="reviewPhone">-</span></p>
+                                <p><strong>Organization:</strong> <span id="reviewOrg">-</span></p>
+                                <p><strong>Address:</strong> <span id="reviewAddress">-</span></p>
+                            </div>
+                        </div>
+                        <div class="review-section">
+                            <h4>Food Details</h4>
+                            <div id="reviewFoodDetails" class="review-content">
+                                <p><strong>Food Type:</strong> <span id="reviewFoodType">-</span></p>
+                                <p><strong>Food Items:</strong> <span id="reviewFoodItems">-</span></p>
+                                <p><strong>Quantity:</strong> <span id="reviewQuantity">-</span> lbs/kg</p>
+                                <p><strong>Packaging:</strong> <span id="reviewPackaging">-</span></p>
+                                <p><strong>Expiry Date:</strong> <span id="reviewExpiry">-</span></p>
+                                <p><strong>Special Instructions:</strong> <span id="reviewInstructions">-</span></p>
+                            </div>
+                        </div>
+                        <div class="review-section">
+                            <h4>Delivery Details</h4>
+                            <div id="reviewDeliveryDetails" class="review-content">
+                                <p><strong>Method:</strong> <span id="reviewDeliveryMethod">-</span></p>
+                                <p id="reviewPickupDateRow"><strong>Pickup Date:</strong> <span id="reviewPickupDate">-</span></p>
+                                <p id="reviewPickupTimeRow"><strong>Pickup Time:</strong> <span id="reviewPickupTime">-</span></p>
+                                <p id="reviewDropoffLocationRow" style="display:none;"><strong>Drop-off Location:</strong> <span id="reviewDropoffLocation">-</span></p>
+                                <p id="reviewDropoffDateRow" style="display:none;"><strong>Drop-off Date:</strong> <span id="reviewDropoffDate">-</span></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="termsAgree" required>
+                                <label for="termsAgree">I confirm that all donation information is accurate and the food items comply with safety guidelines.</label>
+                            </div>
+                        </div>
+                        <div class="step-buttons">
+                            <button type="button" id="step4Back" class="back-btn">Back: Delivery Options</button>
+                            <button type="submit" id="submitDonation">Submit Donation</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="sidebar">
+                <div class="impact-card">
+                    <h3>Your Impact</h3>
+                    <div class="impact-visualization">
+                        <p>Your donation could help:</p>
+                        <div class="impact-number">20 People</div>
+                        <p>receive a nutritious meal</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">65% of weekly goal</div>
+                        </div>
+                        <p>We've collected 650 lbs of food this week</p>
+                        <p>Our goal: 1,000 lbs per week</p>
+                    </div>
+                </div>
+                
+                <div class="matching-card">
+                    <h3>Nearby Food Banks</h3>
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Community Food Bank <span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">123 Main St, Downtown</div>
+                        <div class="food-bank-needs">Needs: Canned goods, pasta, rice</div>
+                    </div>
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Give India Foundation<span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">456 West Blvd, Westside</div>
+                        <div class="food-bank-needs">Needs: Baby food, diapers, formula</div>
+                    </div>
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Helping Hands Center <span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">789 North Ave, Northgate</div>
+                        <div class="food-bank-needs">Needs: Fresh produce, dairy products</div>
+                    </div>
+                </div>
+                
+                <div class="guidelines-card">
+                    <h3>Food Safety Guidelines</h3>
+                    <div class="guideline-item">Non-perishable items must not be expired or opened.</div>
+                    <div class="guideline-item">Perishable foods must be properly refrigerated.</div>
+                    <div class="guideline-item">All donations must be in original packaging when possible.</div>
+                    <div class="guideline-item">Home-cooked meals cannot be accepted.</div>
+                    <div class="guideline-item">Fresh produce should be clean and undamaged.</div>
+                </div>
+                
+                <div class="testimonials-card">
+                    <h3>Donor Testimonials</h3>
+                    <div class="testimonial">
+                        "Donating excess food from our restaurant has been simple with this platform. The pickup service is always on time and professional."
+                        <div class="testimonial-author">- Sarah, Local Restaurant Owner</div>
+                    </div>
+                    <div class="testimonial">
+                        "It feels great knowing the food I donate goes directly to families in my neighborhood."
+                        <div class="testimonial-author">- Michael, Community Member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="thank-you-screen" id="thankYouScreen">
+            <h2>Thank You for Your Donation!</h2>
+            <p>Your generosity helps us feed families in our community.</p>
+            <div class="tracking-info">
+                <h3>Donation Details</h3>
+                <div class="tracking-id">Tracking ID: FD-12345</div>
+                <p><strong>Status:</strong> Scheduled for pickup</p>
+                <p><strong>Date:</strong> <span id="confirmationDate">March 5, 2025</span></p>
+                <p><strong>Time:</strong> <span id="confirmationTime">Morning (9AM - 12PM)</span></p>
+                <p>You will receive email and SMS updates about your donation.</p>
+            </div>
+            <h3>Share Your Impact</h3>
+            <p>Inspire others to donate by sharing your contribution:</p>
+            <div class="social-sharing">
+                <button class="social-btn fb-btn">Facebook</button>
+                <button class="social-btn twitter-btn">Twitter</button>
+                <button class="social-btn linkedin-btn">LinkedIn</button>
+            </div>
+            <button id="donateAgain" style="margin-top: 20px;">Make Another Donation</button>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">What types of food can I donate? <span>+</span></div>
+                <div class="faq-answer">We accept non-perishable foods like canned goods, pasta, rice, and cereal, as well as fresh produce, dairy, and frozen items in good condition. All items must be unexpired and in their original packaging.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How does pickup scheduling work? <span>+</span></div>
+                <div class="faq-answer">After submitting your donation form, you'll receive a confirmation with your scheduled pickup date and time. Our volunteers will arrive during the selected time slot. You'll receive reminder notifications via email or SMS.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I track where my donation goes? <span>+</span></div>
+                <div class="faq-answer">Yes! Once your donation is processed, you'll receive updates about which food bank or shelter received your items. We also provide impact statistics showing how many people your donation helped feed.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Do I get a tax receipt for my donation? <span>+</span></div>
+                <div class="faq-answer">Yes, we provide tax receipts for all documented food donations. The receipt will be emailed to you after your donation has been processed.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">How can I volunteer to help with food distribution? <span>+</span></div>
+                <div class="faq-answer">We're always looking for volunteers! Click on the "Volunteer" link in our footer to see current opportunities and sign up for shifts that fit your schedule.</div>
+            </div>
+        </div>
+    </div>
+    <script src="donor.js"></script>
+</body>
+</html>

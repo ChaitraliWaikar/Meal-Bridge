@@ -1,0 +1,410 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: #fafafa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: #7c73e6;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.donation-form {
+    flex: 2;
+    background: #ffe9e3;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.impact-card, .matching-card, .guidelines-card, .testimonials-card {
+    background: #c4c1e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.matching-card {
+    background: #ffe9e3;
+}
+
+.guidelines-card {
+    background: #fafafa;
+    border: 1px solid #c4c1e0;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #7c73e6;
+}
+
+h3 {
+    margin-bottom: 10px;
+    color: #7c73e6;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.radio-option input {
+    width: auto;
+}
+
+button {
+    background: #7c73e6;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #6a62d1;
+}
+
+.impact-visualization {
+    text-align: center;
+    padding: 15px;
+}
+
+.impact-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #7c73e6;
+    margin: 10px 0;
+}
+
+.progress-container {
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.progress-bar {
+    width: 65%;
+    height: 20px;
+    background: #7c73e6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.food-bank-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background: white;
+    border-left: 4px solid #7c73e6;
+}
+
+.food-bank-name {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.available {
+    color: green;
+    font-size: 0.8rem;
+}
+
+.food-bank-address {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.food-bank-needs {
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.guideline-item {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.guideline-item:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #7c73e6;
+    font-weight: bold;
+}
+
+.social-sharing {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fb-btn {
+    background: #3b5998;
+}
+
+.twitter-btn {
+    background: #1da1f2;
+}
+
+.linkedin-btn {
+    background: #0077b5;
+}
+
+.testimonial {
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    text-align: right;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.9rem;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-question {
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    margin-top: 5px;
+    padding-left: 10px;
+    border-left: 2px solid #7c73e6;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.show-answer .faq-answer {
+    display: block;
+}
+
+.thank-you-screen {
+    display: none;
+    text-align: center;
+    background: #ffe9e3;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.thank-you-screen h2 {
+    margin-bottom: 20px;
+}
+
+.tracking-info {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.tracking-id {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7c73e6;
+    margin: 10px 0;
+}
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px;
+    background: #7c73e6;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.steps-container {
+    margin-bottom: 25px;
+}
+
+.steps-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.steps-nav::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ddd;
+    z-index: 1;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #c4c1e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.step-number.active {
+    background: #7c73e6;
+}
+
+.step-number.completed {
+    background: #6a62d1;
+}
+
+.step-label {
+    font-size: 0.8rem;
+    text-align: center;
+    color: #666;
+}
+
+.step-label.active {
+    color: #7c73e6;
+    font-weight: bold;
+}
+
+.form-section {
+    display: none;
+}
+
+.form-section.active {
+    display: block;
+}
+
+.step-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.back-btn {
+    background: #c4c1e0;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .donation-form, .sidebar {
+        flex: none;
+        width: 100%;
+    }
+    
+    .steps-nav {
+        flex-wrap: wrap;
+    }
+    
+    .step-item {
+        margin-bottom: 10px;
+        flex: 0 0 30%;
+    }
+}

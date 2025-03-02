@@ -1,0 +1,1006 @@
+can u add this code to link foodtesting.html in this
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #7c73e6;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .donation-form {
+            flex: 2;
+            background: #ffe9e3;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .impact-card, .matching-card, .guidelines-card, .testimonials-card {
+            background: #c4c1e0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .matching-card {
+            background: #ffe9e3;
+        }
+        
+        .guidelines-card {
+            background: #fafafa;
+            border: 1px solid #c4c1e0;
+        }
+        
+        h2 {
+            margin-bottom: 15px;
+            color: #7c73e6;
+        }
+        
+        h3 {
+            margin-bottom: 10px;
+            color: #7c73e6;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .radio-option input {
+            width: auto;
+        }
+        
+        button {
+            background: #7c73e6;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #6a62d1;
+        }
+        
+        .impact-visualization {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7c73e6;
+            margin: 10px 0;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .progress-bar {
+            width: 65%;
+            height: 20px;
+            background: #7c73e6;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .food-bank-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: white;
+            border-left: 4px solid #7c73e6;
+        }
+        
+        .food-bank-name {
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .available {
+            color: green;
+            font-size: 0.8rem;
+        }
+        
+        .food-bank-address {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .food-bank-needs {
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .guideline-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .guideline-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #7c73e6;
+            font-weight: bold;
+        }
+        
+        .social-sharing {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .social-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .fb-btn {
+            background: #3b5998;
+        }
+        
+        .twitter-btn {
+            background: #1da1f2;
+        }
+        
+        .linkedin-btn {
+            background: #0077b5;
+        }
+        
+        .testimonial {
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            text-align: right;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 0.9rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            margin-top: 5px;
+            padding-left: 10px;
+            border-left: 2px solid #7c73e6;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .show-answer .faq-answer {
+            display: block;
+        }
+        
+        .thank-you-screen {
+            display: none;
+            text-align: center;
+            background: #ffe9e3;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .thank-you-screen h2 {
+            margin-bottom: 20px;
+        }
+        
+        .tracking-info {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .tracking-id {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #7c73e6;
+            margin: 10px 0;
+        }
+        
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 20px;
+            background: #7c73e6;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        /* Step navigation styling */
+        .steps-container {
+            margin-bottom: 25px;
+        }
+        
+        .steps-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .steps-nav::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            z-index: 1;
+        }
+        
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #c4c1e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .step-number.active {
+            background: #7c73e6;
+        }
+        
+        .step-number.completed {
+            background: #6a62d1;
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #666;
+        }
+        
+        .step-label.active {
+            color: #7c73e6;
+            font-weight: bold;
+        }
+        
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+        }
+        
+        .step-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            background: #c4c1e0;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .donation-form, .sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .steps-nav {
+                flex-wrap: wrap;
+            }
+            
+            .step-item {
+                margin-bottom: 10px;
+                flex: 0 0 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Food Donation Portal</h1>
+            <p class="tagline">Your donations feed families in need</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="donation-form" id="donationForm">
+                <h2>Food Donation Form</h2>
+                
+                <div class="steps-container">
+                    <div class="steps-nav">
+                        <div class="step-item">
+                            <div class="step-number active" id="step1-indicator">1</div>
+                            <div class="step-label active">Donor Information</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step2-indicator">2</div>
+                            <div class="step-label">Food Details</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step3-indicator">3</div>
+                            <div class="step-label">Delivery Options</div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number" id="step4-indicator">4</div>
+                            <div class="step-label">Review & Submit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form id="foodDonationForm">
+                    <!-- Step 1: Donor Information -->
+                    <div class="form-section active" id="step1">
+                        <h3>Step 1: Donor Information</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name*</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address*</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number*</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="organization">Organization (if applicable)</label>
+                            <input type="text" id="organization">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Address*</label>
+                            <input type="text" id="address" required>
+                        </div>
+                        
+                        <div class="step-buttons">
+                            <div></div> <!-- Empty div for spacing -->
+                            <button type="button" id="step1Next" class="next-btn">Next: Food Details</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Food Details -->
+                    <div class="form-section" id="step2">
+                        <h3>Step 2: Food Details</h3>
+                        <div class="form-group">
+                            <label>Food Type*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="perishable" name="foodType" value="perishable">
+                                    <label for="perishable">Perishable</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="nonPerishable" name="foodType" value="nonPerishable" checked>
+                                    <label for="nonPerishable">Non-Perishable</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="foodItems">Food Items*</label>
+                            <textarea id="foodItems" rows="3" required placeholder="e.g., 10 cans of soup, 5 boxes of pasta, etc."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quantity">Approximate Quantity (lbs/kg)*</label>
+                            <input type="number" id="quantity" min="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="packaging">Packaging Details</label>
+                            <select id="packaging">
+                                <option value="original">Original Packaging</option>
+                                <option value="repackaged">Repackaged</option>
+                                <option value="bulk">Bulk</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date (if applicable)</label>
+                            <input type="date" id="expiryDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="instructions">Special Instructions</label>
+                            <textarea id="instructions" rows="2" placeholder="Any handling instructions or notes"></textarea>
+                        </div>
+                        
+                        <div class="step-buttons">
+                            <button type="button" id="step2Back" class="back-btn">Back: Donor Info</button>
+                            <button type="button" id="step2Next" class="next-btn">Next: Delivery Options</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Delivery Options -->
+                    <div class="form-section" id="step3">
+                        <h3>Step 3: Delivery Options</h3>
+                        <div class="form-group">
+                            <label>Preferred Method*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="pickup" name="deliveryMethod" value="pickup" checked>
+                                    <label for="pickup">Schedule a Pickup</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="dropoff" name="deliveryMethod" value="dropoff">
+                                    <label for="dropoff">Drop-off at Location</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-pickup-options">
+                            <div class="form-group" id="pickupDateGroup">
+                                <label for="pickupDate">Preferred Pickup Date*</label>
+                                <input type="date" id="pickupDate" required>
+                            </div>
+                            
+                            <div class="form-group" id="pickupTimeGroup">
+                                <label for="pickupTime">Preferred Pickup Time*</label>
+                                <select id="pickupTime" required>
+                                    <option value="">Select a time</option>
+                                    <option value="morning">Morning (9AM - 12PM)</option>
+                                    <option value="afternoon">Afternoon (12PM - 4PM)</option>
+                                    <option value="evening">Evening (4PM - 7PM)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-dropoff-options" style="display: none;">
+                            <div class="form-group" id="dropoffLocationGroup">
+                                <label for="dropoffLocation">Select Drop-off Location*</label>
+                                <select id="dropoffLocation">
+                                    <option value="">Select a location</option>
+                                    <option value="loc1">Community Food Bank - Downtown</option>
+                                    <option value="loc2">Hope Shelter - Westside</option>
+                                    <option value="loc3">Helping Hands Center - Northgate</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="dropoffDateGroup">
+                                <label for="dropoffDate">Planned Drop-off Date*</label>
+                                <input type="date" id="dropoffDate">
+                            </div>
+                        </div>
+                        
+                        <div class="step-buttons">
+                            <button type="button" id="step3Back" class="back-btn">Back: Food Details</button>
+                            <button type="button" id="step3Next" class="next-btn">Next: Review & Submit</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Review & Submit -->
+                    <div class="form-section" id="step4">
+                        <h3>Step 4: Review & Submit</h3>
+                        
+                        <div class="review-section">
+                            <h4>Donor Information</h4>
+                            <div id="reviewDonorInfo" class="review-content">
+                                <p><strong>Name:</strong> <span id="reviewName">-</span></p>
+                                <p><strong>Email:</strong> <span id="reviewEmail">-</span></p>
+                                <p><strong>Phone:</strong> <span id="reviewPhone">-</span></p>
+                                <p><strong>Organization:</strong> <span id="reviewOrg">-</span></p>
+                                <p><strong>Address:</strong> <span id="reviewAddress">-</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-section">
+                            <h4>Food Details</h4>
+                            <div id="reviewFoodDetails" class="review-content">
+                                <p><strong>Food Type:</strong> <span id="reviewFoodType">-</span></p>
+                                <p><strong>Food Items:</strong> <span id="reviewFoodItems">-</span></p>
+                                <p><strong>Quantity:</strong> <span id="reviewQuantity">-</span> lbs/kg</p>
+                                <p><strong>Packaging:</strong> <span id="reviewPackaging">-</span></p>
+                                <p><strong>Expiry Date:</strong> <span id="reviewExpiry">-</span></p>
+                                <p><strong>Special Instructions:</strong> <span id="reviewInstructions">-</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="review-section">
+                            <h4>Delivery Details</h4>
+                            <div id="reviewDeliveryDetails" class="review-content">
+                                <p><strong>Method:</strong> <span id="reviewDeliveryMethod">-</span></p>
+                                <p id="reviewPickupDateRow"><strong>Pickup Date:</strong> <span id="reviewPickupDate">-</span></p>
+                                <p id="reviewPickupTimeRow"><strong>Pickup Time:</strong> <span id="reviewPickupTime">-</span></p>
+                                <p id="reviewDropoffLocationRow" style="display:none;"><strong>Drop-off Location:</strong> <span id="reviewDropoffLocation">-</span></p>
+                                <p id="reviewDropoffDateRow" style="display:none;"><strong>Drop-off Date:</strong> <span id="reviewDropoffDate">-</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="termsAgree" required>
+                                <label for="termsAgree">I confirm that all donation information is accurate and the food items comply with safety guidelines.</label>
+                            </div>
+                        </div>
+                        
+                        <div class="step-buttons">
+                            <button type="button" id="step4Back" class="back-btn">Back: Delivery Options</button>
+                            <button type="submit" id="submitDonation">Submit Donation</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="sidebar">
+                <div class="impact-card">
+                    <h3>Your Impact</h3>
+                    <div class="impact-visualization">
+                        <p>Your donation could help:</p>
+                        <div class="impact-number">20 People</div>
+                        <p>receive a nutritious meal</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar">65% of weekly goal</div>
+                        </div>
+                        <p>We've collected 650 lbs of food this week</p>
+                        <p>Our goal: 1,000 lbs per week</p>
+                    </div>
+                </div>
+                
+                <div class="matching-card">
+                    <h3>Nearby Food Banks</h3>
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Community Food Bank <span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">123 Main St, Downtown</div>
+                        <div class="food-bank-needs">Needs: Canned goods, pasta, rice</div>
+                    </div>
+                    
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Give India Foundation<span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">456 West Blvd, Westside</div>
+                        <div class="food-bank-needs">Needs: Baby food, diapers, formula</div>
+                    </div>
+                    
+                    <div class="food-bank-item">
+                        <div class="food-bank-name">
+                            Helping Hands Center <span class="available">OPEN NOW</span>
+                        </div>
+                        <div class="food-bank-address">789 North Ave, Northgate</div>
+                        <div class="food-bank-needs">Needs: Fresh produce, dairy products</div>
+                    </div>
+                </div>
+                
+                <div class="guidelines-card">
+                    <h3>Food Safety Guidelines</h3>
+                    <div class="guideline-item">Non-perishable items must not be expired or opened.</div>
+                    <div class="guideline-item">Perishable foods must be properly refrigerated.</div>
+                    <div class="guideline-item">All donations must be in original packaging when possible.</div>
+                    <div class="guideline-item">Home-cooked meals cannot be accepted.</div>
+                    <div class="guideline-item">Fresh produce should be clean and undamaged.</div>
+                </div>
+                
+                <div class="testimonials-card">
+                    <h3>Donor Testimonials</h3>
+                    <div class="testimonial">
+                        "Donating excess food from our restaurant has been simple with this platform. The pickup service is always on time and professional."
+                        <div class="testimonial-author">- Sarah, Local Restaurant Owner</div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        "It feels great knowing the food I donate goes directly to families in my neighborhood."
+                        <div class="testimonial-author">- Michael, Community Member</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="thank-you-screen" id="thankYouScreen">
+            <h2>Thank You for Your Donation!</h2>
+            <p>Your generosity helps us feed families in our community.</p>
+            
+            <div class="tracking-info">
+                <h3>Donation Details</h3>
+                <div class="tracking-id">Tracking ID: FD-12345</div>
+                <p><strong>Status:</strong> Scheduled for pickup</p>
+                <p><strong>Date:</strong> <span id="confirmationDate">March 5, 2025</span></p>
+                <p><strong>Time:</strong> <span id="confirmationTime">Morning (9AM - 12PM)</span></p>
+                <p>You will receive email and SMS updates about your donation.</p>
+            </div>
+            
+            <h3>Share Your Impact</h3>
+            <p>Inspire others to donate by sharing your contribution:</p>
+            <div class="social-sharing">
+                <button class="social-btn fb-btn">Facebook</button>
+                <button class="social-btn twitter-btn">Twitter</button>
+                <button class="social-btn linkedin-btn">LinkedIn</button>
+            </div>
+            
+            <button id="donateAgain" style="margin-top: 20px;">Make Another Donation</button>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">What types of food can I donate? <span>+</span></div>
+                <div class="faq-answer">We accept non-perishable foods like canned goods, pasta, rice, and cereal, as well as fresh produce, dairy, and frozen items in good condition. All items must be unexpired and in their original packaging.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How does pickup scheduling work? <span>+</span></div>
+                <div class="faq-answer">After submitting your donation form, you'll receive a confirmation with your scheduled pickup date and time. Our volunteers will arrive during the selected time slot. You'll receive reminder notifications via email or SMS.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I track where my donation goes? <span>+</span></div>
+                <div class="faq-answer">Yes! Once your donation is processed, you'll receive updates about which food bank or shelter received your items. We also provide impact statistics showing how many people your donation helped feed.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do I get a tax receipt for my donation? <span>+</span></div>
+                <div class="faq-answer">Yes, we provide tax receipts for all documented food donations. The receipt will be emailed to you after your donation has been processed.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How can I volunteer to help with food distribution? <span>+</span></div>
+                <div class="faq-answer">We're always looking for volunteers! Click on the "Volunteer" link in our footer to see current opportunities and sign up for shifts that fit your schedule.</div>
+            </div>
+        </div>
+    </div>
+  
+<script src="./donor.js" type="text/javascript">
+    // Step navigation
+const steps = document.querySelectorAll('.form-section');
+const nextButtons = document.querySelectorAll('.next-btn');
+const backButtons = document.querySelectorAll('.back-btn');
+const stepIndicators = document.querySelectorAll('.step-number');
+const stepLabels = document.querySelectorAll('.step-label');
+const donationForm = document.getElementById('foodDonationForm');
+const thankYouScreen = document.getElementById('thankYouScreen');
+
+// Next button handlers
+nextButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Find current active step
+        const currentStep = document.querySelector('.form-section.active');
+        const currentStepIndex = Array.from(steps).indexOf(currentStep);
+
+        // Basic validation for each step
+        if (currentStepIndex === 0) {
+            // Validate Step 1
+            if (!validateStep1()) return;
+        } else if (currentStepIndex === 1) {
+            // Validate Step 2
+            if (!validateStep2()) return;
+        } else if (currentStepIndex === 2) {
+            // Validate Step 3
+            if (!validateStep3()) return;
+        }
+
+        // Move to next step
+        if (currentStepIndex < steps.length - 1) {
+            // Hide current step
+            currentStep.classList.remove('active');
+
+            // Show next step
+            steps[currentStepIndex + 1].classList.add('active');
+
+            // Update indicators
+            updateStepIndicators(currentStepIndex + 1);
+
+            // Update review section if on the last step
+            if (currentStepIndex + 1 === 3) {
+                updateReviewSection();
+            }
+        }
+    });
+});
+
+// Back button handlers
+backButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Find current active step
+        const currentStep = document.querySelector('.form-section.active');
+        const currentStepIndex = Array.from(steps).indexOf(currentStep);
+
+        // Move to previous step
+        if (currentStepIndex > 0) {
+            // Hide current step
+            currentStep.classList.remove('active');
+
+            // Show previous step
+            steps[currentStepIndex - 1].classList.add('active');
+
+            // Update indicators
+            updateStepIndicators(currentStepIndex - 1);
+        }
+    });
+});
+
+// Update step indicators
+function updateStepIndicators(activeIndex) {
+    stepIndicators.forEach((indicator, index) => {
+        if (index < activeIndex) {
+            indicator.classList.add('completed');
+            indicator.classList.remove('active');
+        } else if (index === activeIndex) {
+            indicator.classList.add('active');
+            indicator.classList.remove('completed');
+        } else {
+            indicator.classList.remove('active', 'completed');
+        }
+    });
+
+    stepLabels.forEach((label, index) => {
+        if (index === activeIndex) {
+            label.classList.add('active');
+        } else {
+            label.classList.remove('active');
+        }
+    });
+}
+
+// Validate Step 1: Donor Information
+function validateStep1() {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    if (!name || !email || !phone || !address) {
+        alert('Please fill out all required fields in Step 1.');
+        return false;
+    }
+
+    return true;
+}
+
+// Validate Step 2: Food Details
+function validateStep2() {
+    const foodType = document.querySelector('input[name="foodType"]:checked');
+    const foodItems = document.getElementById('foodItems').value.trim();
+    const quantity = document.getElementById('quantity').value.trim();
+
+    if (!foodType || !foodItems || !quantity) {
+        alert('Please fill out all required fields in Step 2.');
+        return false;
+    }
+
+    return true;
+}
+
+// Validate Step 3: Delivery Options
+function validateStep3() {
+    const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked');
+    const pickupDate = document.getElementById('pickupDate').value.trim();
+    const pickupTime = document.getElementById('pickupTime').value.trim();
+    const dropoffLocation = document.getElementById('dropoffLocation').value.trim();
+    const dropoffDate = document.getElementById('dropoffDate').value.trim();
+
+    if (!deliveryMethod) {
+        alert('Please select a delivery method.');
+        return false;
+    }
+
+    if (deliveryMethod.value === 'pickup' && (!pickupDate || !pickupTime)) {
+        alert('Please fill out all required fields for pickup.');
+        return false;
+    }
+
+    if (deliveryMethod.value === 'dropoff' && (!dropoffLocation || !dropoffDate)) {
+        alert('Please fill out all required fields for drop-off.');
+        return false;
+    }
+
+    return true;
+}
+
+// Update review section
+function updateReviewSection() {
+    // Donor Information
+    document.getElementById('reviewName').textContent = document.getElementById('name').value;
+    document.getElementById('reviewEmail').textContent = document.getElementById('email').value;
+    document.getElementById('reviewPhone').textContent = document.getElementById('phone').value;
+    document.getElementById('reviewOrg').textContent = document.getElementById('organization').value || '-';
+    document.getElementById('reviewAddress').textContent = document.getElementById('address').value;
+
+    // Food Details
+    document.getElementById('reviewFoodType').textContent = document.querySelector('input[name="foodType"]:checked').value;
+    document.getElementById('reviewFoodItems').textContent = document.getElementById('foodItems').value;
+    document.getElementById('reviewQuantity').textContent = document.getElementById('quantity').value;
+    document.getElementById('reviewPackaging').textContent = document.getElementById('packaging').value;
+    document.getElementById('reviewExpiry').textContent = document.getElementById('expiryDate').value || '-';
+    document.getElementById('reviewInstructions').textContent = document.getElementById('instructions').value || '-';
+
+    // Delivery Details
+    const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+    document.getElementById('reviewDeliveryMethod').textContent = deliveryMethod;
+
+    if (deliveryMethod === 'pickup') {
+        document.getElementById('reviewPickupDateRow').style.display = 'block';
+        document.getElementById('reviewPickupTimeRow').style.display = 'block';
+        document.getElementById('reviewDropoffLocationRow').style.display = 'none';
+        document.getElementById('reviewDropoffDateRow').style.display = 'none';
+
+        document.getElementById('reviewPickupDate').textContent = document.getElementById('pickupDate').value;
+        document.getElementById('reviewPickupTime').textContent = document.getElementById('pickupTime').value;
+    } else {
+        document.getElementById('reviewPickupDateRow').style.display = 'none';
+        document.getElementById('reviewPickupTimeRow').style.display = 'none';
+        document.getElementById('reviewDropoffLocationRow').style.display = 'block';
+        document.getElementById('reviewDropoffDateRow').style.display = 'block';
+
+        document.getElementById('reviewDropoffLocation').textContent = document.getElementById('dropoffLocation').value;
+        document.getElementById('reviewDropoffDate').textContent = document.getElementById('dropoffDate').value;
+    }
+}
+
+// Form submission
+donationForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Show thank you screen
+    donationForm.style.display = 'none';
+    thankYouScreen.style.display = 'block';
+
+    // Reset form after submission
+    setTimeout(() => {
+        donationForm.reset();
+        steps.forEach((step, index) => {
+            if (index === 0) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+        updateStepIndicators(0);
+        donationForm.style.display = 'block';
+        thankYouScreen.style.display = 'none';
+    }, 5000); // Reset after 5 seconds
+});
+
+// Toggle delivery options based on selected method
+document.querySelectorAll('input[name="deliveryMethod"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+        if (radio.value === 'pickup') {
+            document.querySelector('.delivery-pickup-options').style.display = 'block';
+            document.querySelector('.delivery-dropoff-options').style.display = 'none';
+        } else {
+            document.querySelector('.delivery-pickup-options').style.display = 'none';
+            document.querySelector('.delivery-dropoff-options').style.display = 'block';
+        }
+    });
+});
+
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        question.parentElement.classList.toggle('show-answer');
+    });
+});
+</script>
+
+</body>

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Donation Inventory</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #7c73e6;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            background-color: #c4c1e0;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .filters {
+            background-color: #ffe9e3;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            min-width: 80px;
+        }
+        
+        .filter-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        button {
+            background-color: #7c73e6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #6560c8;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            max-width: 300px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .inventory-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .inventory-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .item-image {
+            height: 180px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .item-details {
+            padding: 15px;
+        }
+        
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .item-category {
+            display: inline-block;
+            background-color: #c4c1e0;
+            color: #333;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .item-quantity {
+            font-weight: 500;
+        }
+        
+        .expiry-date {
+            color: #e74c3c;
+        }
+        
+        .item-description {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .item-allergens {
+            font-size: 0.8rem;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .item-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .request-btn {
+            flex-grow: 1;
+            padding: 8px 0;
+            text-align: center;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #333;
+            padding: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .request-summary {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .pagination button {
+            margin: 0 5px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .pagination button.active {
+            background-color: #7c73e6;
+            color: white;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .inventory-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        
+        .status-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .sort-by {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tag-low {
+            background-color: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+        
+        .tag-expiring {
+            background-color: #f39c12;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .filter-group {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Food Donation Inventory</h1>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Inventory</a></li>
+                    <li><a href="#">My Requests</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="hero">
+            <h2>Available Food Donations</h2>
+            <p>Browse available food items and place your request. All items have been quality checked for safety.</p>
+        </div>
+        
+        <div class="filters">
+            <div class="search-bar">
+                <input type="text" placeholder="Search items..." id="searchInput">
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-label">Category:</div>
+                <select class="filter-input" id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="fresh">Fresh Produce</option>
+                    <option value="canned">Canned Goods</option>
+                    <option value="dairy">Dairy Products</option>
+                    <option value="bakery">Bakery Items</option>
+                    <option value="meat">Meat & Poultry</option>
+                    <option value="dry">Dry Goods</option>
+                    <option value="prepared">Prepared Meals</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <div class="filter-label">Dietary:</div>
+                <select class="filter-input" id="dietaryFilter">
+                    <option value="all">All Items</option>
+                    <option value="vegetarian">Vegetarian</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="gluten-free">Gluten Free</option>
+                    <option value="dairy-free">Dairy Free</option>
+                </select>
+            </div>
+            
+            <button id="applyFilters">Apply Filters</button>
+        </div>
+        
+        <div class="inventory-status">
+            <div class="status-text">
+                Showing <span id="item-count">12</span> items available for request
+            </div>
+            <div class="sort-by">
+                <span>Sort by:</span>
+                <select id="sortOptions">
+                    <option value="newest">Newest First</option>
+                    <option value="expiry">Expiry Date</option>
+                    <option value="quantity">Quantity Available</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="inventory-grid" id="inventoryGrid">
+            <!-- Item 1 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Fresh Apples">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Fresh Apples</h3>
+                    <div class="item-category">Fresh Produce</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 45 lbs</div>
+                        <div class="expiry-date">Expires: 03/10/2025</div>
+                    </div>
+                    <p class="item-description">Fresh red and green apples, perfect for snacking or cooking.</p>
+                    <div class="item-allergens">Allergens: None</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Fresh Apples', 'Fresh Produce', 45)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Canned Soup">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Canned Vegetable Soup</h3>
+                    <div class="item-category">Canned Goods</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 36 cans <span class="tag-low">Low Stock</span></div>
+                        <div class="expiry-date">Expires: 09/15/2025</div>
+                    </div>
+                    <p class="item-description">Mixed vegetable soup in 15 oz cans.</p>
+                    <div class="item-allergens">Allergens: May contain celery</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Canned Vegetable Soup', 'Canned Goods', 36)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Pasta">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Whole Grain Pasta</h3>
+                    <div class="item-category">Dry Goods</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 50 boxes</div>
+                        <div class="expiry-date">Expires: 11/20/2025</div>
+                    </div>
+                    <p class="item-description">16 oz boxes of whole grain spaghetti pasta.</p>
+                    <div class="item-allergens">Allergens: Wheat, may contain traces of eggs</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Whole Grain Pasta', 'Dry Goods', 50)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Milk">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Low-Fat Milk</h3>
+                    <div class="item-category">Dairy Products</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 24 gallons</div>
+                        <div class="expiry-date">Expires: 03/05/2025 <span class="tag-expiring">Expiring Soon</span></div>
+                    </div>
+                    <p class="item-description">1% low-fat milk in gallon containers.</p>
+                    <div class="item-allergens">Allergens: Milk</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Low-Fat Milk', 'Dairy Products', 24)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 5 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Bread">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Multi-Grain Bread</h3>
+                    <div class="item-category">Bakery Items</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 30 loaves</div>
+                        <div class="expiry-date">Expires: 03/04/2025 <span class="tag-expiring">Expiring Soon</span></div>
+                    </div>
+                    <p class="item-description">Fresh multi-grain bread loaves.</p>
+                    <div class="item-allergens">Allergens: Wheat, may contain nuts and seeds</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Multi-Grain Bread', 'Bakery Items', 30)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 6 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Chicken">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Frozen Chicken Breasts</h3>
+                    <div class="item-category">Meat & Poultry</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 40 lbs</div>
+                        <div class="expiry-date">Expires: 06/15/2025</div>
+                    </div>
+                    <p class="item-description">Individually wrapped frozen chicken breasts.</p>
+                    <div class="item-allergens">Allergens: None</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Frozen Chicken Breasts', 'Meat & Poultry', 40)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 7 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Rice">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Brown Rice</h3>
+                    <div class="item-category">Dry Goods</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 25 bags</div>
+                        <div class="expiry-date">Expires: 12/20/2025</div>
+                    </div>
+                    <p class="item-description">2 lb bags of whole grain brown rice.</p>
+                    <div class="item-allergens">Allergens: None</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Brown Rice', 'Dry Goods', 25)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 8 -->
+            <div class="inventory-item">
+                <div class="item-image">
+                    <img src="/api/placeholder/280/180" alt="Carrots">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Fresh Carrots</h3>
+                    <div class="item-category">Fresh Produce</div>
+                    <div class="item-meta">
+                        <div class="item-quantity">Quantity: 35 lbs</div>
+                        <div class="expiry-date">Expires: 03/12/2025</div>
+                    </div>
+                    <p class="item-description">Fresh whole carrots, perfect for cooking or snacking.</p>
+                    <div class="item-allergens">Allergens: None</div>
+                    <div class="item-actions">
+                        <button class="request-btn" onclick="openRequestModal('Fresh Carrots', 'Fresh Produce', 35)">Request Item</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional items 9-12 would follow the same pattern -->
+        </div>
+        
+        <div class="pagination">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>Next →</button>
+        </div>
+    </div>
+    
+    <!-- Request Modal -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeRequestModal()">×</button>
+            <h2>Request Item</h2>
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="itemName">Item:</label>
+                    <input type="text" id="itemName" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="itemCategory">Category:</label>
+                    <input type="text" id="itemCategory" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="availableQuantity">Available Quantity:</label>
+                    <input type="text" id="availableQuantity" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="requestQuantity">Requested Quantity:</label>
+                    <input type="number" id="requestQuantity" min="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="requestReason">Reason for Request:</label>
+                    <textarea id="requestReason" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pickupDate">Preferred Pickup Date:</label>
+                    <input type="date" id="pickupDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="requestorName">Your Name:</label>
+                    <input type="text" id="requestorName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="requestorContact">Contact Number:</label>
+                    <input type="tel" id="requestorContact" required>
+                </div>
+                
+                <div class="request-summary">
+                    <h3>Request Summary</h3>
+                    <div class="summary-item">
+                        <span>Item:</span>
+                        <span id="summaryItem"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Quantity:</span>
+                        <span id="summaryQuantity"></span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Pickup Date:</span>
+                        <span id="summaryDate"></span>
